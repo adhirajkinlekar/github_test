@@ -10,6 +10,16 @@ app.use(express.json());
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_API_URL = "https://api.github.com";
+
+const endpoints = {
+    "GET /github": "Show your GitHub profile data (followers, following, repositories, etc.)",
+    "GET /github/:repoName": "Show details about a specific repository",
+    "POST /github/:repoName/issues": "Create an issue in the given repository",
+};
+
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome to the GitHub API Wrapper", endpoints });
+});
  
 app.get("/github", async (req, res) => {
     try {
